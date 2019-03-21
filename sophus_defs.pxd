@@ -13,6 +13,7 @@ cdef extern from "<sophus/so3.hpp>" namespace "Sophus":
       Matrix3d& matrix()
 
       Vector3d log()
+      Scalar* data()
 
       SO3 inverse()
       void normalize()

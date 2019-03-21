@@ -41,7 +41,11 @@ cdef class SO3:
 
     def log(self):
         return ndarray(self.thisptr.log())
-
+    
+    def data(self):
+        ptr = self.thisptr.data()
+        return (ptr[0], ptr[1], ptr[2], ptr[3])
+        
     def inverse(self):
         res = SO3()
         res.thisptr = new _SO3d(self.thisptr.inverse()) 
