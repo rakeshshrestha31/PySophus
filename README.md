@@ -35,13 +35,18 @@ If you require any functionality that is not currently in the wrapper, feel free
 
 How to install
 --------------
+Install `cython` if you don't have already
 
-First, setup `eigency`
+```
+pip install cython
+```
+
+Then, setup `eigency`
 
 ```
 git clone https://github.com/wouterboomsma/eigency.git
 cd eigency
-python setup.py build_ext --inplace
+python setup.py
 # put in your bashrc
 export PYTHONPATH="$PYTHONPATH:<path to eigency>"
 ```
@@ -56,6 +61,8 @@ git submodule update
 python setup.py build_ext --inplace
 # put in your bashrc
 export PYTHONPATH="$PYTHONPATH:<path to PySophus>"
+# alternately, install it to your default dist-packages
+python setup.py install
 ```
 
 Usage
