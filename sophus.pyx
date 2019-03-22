@@ -44,7 +44,7 @@ cdef class SO3:
     
     def data(self):
         ptr = self.thisptr.data()
-        return (ptr[0], ptr[1], ptr[2], ptr[3])
+        return numpy.array((ptr[0], ptr[1], ptr[2], ptr[3]))
     
     def setData(self, np.ndarray data):
         data = data.reshape((4,))
@@ -152,7 +152,7 @@ cdef class SE3:
         Returns the SO3 part (rotation)
         """
         return SO3(ndarray(self.thisptr.so3().matrix())) 
-
+    
     def log(self):
         return ndarray(self.thisptr.log())
 
@@ -169,6 +169,14 @@ cdef class SE3:
 
     def setRotationMatrix(self, np.ndarray matrix):
         self.thisptr.setRotationMatrix(Map[Matrix3d](matrix))
+
+    def setQuaternion(self, np.ndarray quaternion):
+        quaternion = quaternion.reshape((4,))
+        ptr = self.thisptr.so3().data()
+        ptr[0] = quaternion[0]
+        ptr[1] = quaternion[1]
+        ptr[2] = quaternion[2]
+        ptr[3] = quaternion[3]
 
     def __mul__(SE3 x, SE3 y):
         """
