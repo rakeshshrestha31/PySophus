@@ -45,7 +45,16 @@ cdef class SO3:
     def data(self):
         ptr = self.thisptr.data()
         return (ptr[0], ptr[1], ptr[2], ptr[3])
-        
+    
+    def setData(self, np.ndarray data):
+        data = data.reshape((4,))
+        ptr = self.thisptr.data()
+        ptr[0] = data[0]
+        ptr[1] = data[1]
+        ptr[2] = data[2]
+        ptr[3] = data[3]
+        self.normalize()
+
     def inverse(self):
         res = SO3()
         res.thisptr = new _SO3d(self.thisptr.inverse()) 
